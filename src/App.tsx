@@ -1,9 +1,12 @@
 import "./App.css";
+import BtmHeader from "./components/Header/BtmHeader";
+import TopHeader from "./components/Header/TopHeader";
 
 const App: React.FC = (): React.ReactNode => {
   return (
     <>
-      <h1>Ecommerce React</h1>
+      <TopHeader />
+      <BtmHeader />
     </>
   );
 };
