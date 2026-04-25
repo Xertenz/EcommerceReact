@@ -1,0 +1,29 @@
+nav {
+
+
+  .nav-links {
+    a.active {
+      background-color: #0079ca;
+    }
+  }
+
+  .nav-links,
+  .right,
+  .category-btn {
+    a {
+      padding: 12px;
+      color: var(--white-color);
+      display: block;
+    }
+
+  }
+
+  .category-nav-list {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: 0.2s ease-in-out;
+
+    &.active {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+  }
+}
