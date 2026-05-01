@@ -1,6 +1,4 @@
 nav {
-
-
   .nav-links {
     a.active {
       background-color: #0079ca;
@@ -21,6 +19,7 @@ nav {
   .category-nav-list {
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     transition: 0.2s ease-in-out;
+    z-index: 2;
 
     &.active {
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
