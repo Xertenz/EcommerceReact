@@ -1,17 +1,21 @@
 import { FaStar, FaRegStarHalfStroke } from "react-icons/fa6";
 import { FaShoppingCart, FaShare, FaRegHeart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 type Props = {
   item: {
+    id: number;
     images: string[];
     price: number;
   };
 };
 
 const Product = ({ item }: Props) => {
-  console.log(item);
   return (
-    <div className="product w-[250px] p-[15px] bg-(--white-color) border border-(--border-color) hover:border-(--main-color) cursor-pointer relative group transition-all duration-300 overflow-hidden shadow-[10px_10px_15px_#94949429]">
+    <Link
+      to={`/products/${item.id}`}
+      className="block product w-[250px] p-[15px] bg-(--white-color) border border-(--border-color) hover:border-(--main-color) cursor-pointer relative group transition-all duration-300 overflow-hidden shadow-[10px_10px_15px_#94949429]"
+    >
       <div className="product-img h-[180px] flex justify-center items-center">
         <img src={item.images[0]} alt="" className="h-40 w-auto!" />
       </div>
@@ -40,7 +44,7 @@ const Product = ({ item }: Props) => {
           <FaShare />
         </span>
       </div>
-    </div>
+    </Link>
   );
 };
 

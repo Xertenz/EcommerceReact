@@ -11,7 +11,7 @@ const TopHeader: React.FC = (): React.ReactNode => {
     <div className="top-header">
       <div className="container mx-auto flex justify-between items-center">
         <div className="left">
-          <Link to="/home">
+          <Link to="/">
             <img src={Logo} alt="Logo" />
           </Link>
         </div>
