@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
 import SlideProducts from "../../components/SlideProducts/SlideProducts";
+import SlideProductsLoading from "../../components/SlideProducts/SlideProductsLoading";
 
 const categories: string[] = [
   "smartphones",
@@ -54,17 +55,15 @@ const Home: React.FC = (): React.ReactNode => {
   return (
     <>
       <HeroSlider />
-      {loading ? (
-        <p>Loading....</p>
-      ) : (
-        categories.map((category) => (
-          <SlideProducts
-            key={category}
-            title={category.replace("-", " ")}
-            data={products[category] || []}
-          />
-        ))
-      )}
+      {loading
+        ? categories.map((category) => <SlideProductsLoading key={category} />)
+        : categories.map((category) => (
+            <SlideProducts
+              key={category}
+              title={category.replace("-", " ")}
+              data={products[category] || []}
+            />
+          ))}
     </>
   );
 };

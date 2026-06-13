@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const HeroSlider: React.FC = (): React.ReactNode => {
   return (
-    <section className="mt-12">
+    <section className="mt-12 mb-6">
       <div className="container mx-auto aaa">
         <Swiper
           slidesPerView={1}

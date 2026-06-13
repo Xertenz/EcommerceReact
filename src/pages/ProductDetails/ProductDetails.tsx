@@ -4,6 +4,8 @@ import { FaRegStarHalfStroke, FaStar } from "react-icons/fa6";
 import { TiShoppingCart } from "react-icons/ti";
 import { useParams } from "react-router-dom";
 import SlideProducts from "../../components/SlideProducts/SlideProducts";
+import ProductDetailsLoading from "./ProductDetailsLoading";
+import SlideProductsLoading from "../../components/SlideProducts/SlideProductsLoading";
 
 type Product = {
   images: string[];
@@ -41,7 +43,7 @@ const ProductDetails: React.FC = (): React.ReactNode => {
     };
 
     fetchProduct();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const fetchRelatedProducts = async () => {
@@ -62,14 +64,14 @@ const ProductDetails: React.FC = (): React.ReactNode => {
     fetchRelatedProducts();
   }, [product?.category]);
 
-  if (loading) return <p>Loading now....</p>;
+  if (loading) return <ProductDetailsLoading />;
   if (!product) return <p>Product not found....</p>;
 
   return (
     <section className="product-details">
       <div className="container mx-auto">
-        <div className="flex items-center gap-8">
-          <div className="imgs-item w-4/5! flex flex-col gap-4">
+        <div className="flex items-center gap-8 my-8">
+          <div className="imgs-item w-2/5! flex flex-col gap-4">
             <div className="big-img">
               <img
                 src={currentImg}
@@ -82,7 +84,7 @@ const ProductDetails: React.FC = (): React.ReactNode => {
                 {product.images.map((image, index) => (
                   <div
                     key={index}
-                    className="img-wrapper p-1 w-30! border cursor-pointer"
+                    className="img-wrapper p-1 w-30! border border-(--border-color) cursor-pointer"
                   >
                     <img
                       src={image}
@@ -95,7 +97,7 @@ const ProductDetails: React.FC = (): React.ReactNode => {
               </div>
             </div>
           </div>
-          <div className="item-details ">
+          <div className="item-details w-3/5!">
             <div className="wrapper">
               <h1 className="name mb-4 text-4xl font-bold text-(--main-color)!">
                 {product.title}
@@ -139,7 +141,7 @@ const ProductDetails: React.FC = (): React.ReactNode => {
           </div>
         </div>
         {loadingRelatedProducts ? (
-          <p>Loading...</p>
+          <SlideProductsLoading />
         ) : (
           <div className="slide-products">
             <SlideProducts
