@@ -12,6 +12,8 @@ import { Autoplay, Navigation } from "swiper/modules";
 
 type Item = {
   id: number;
+  title: string;
+  description: string;
   images: string[];
   price: number;
 };

@@ -90,7 +90,7 @@ const ProductDetails: React.FC = (): React.ReactNode => {
                       src={image}
                       alt=""
                       className="w-full"
-                      onClick={(e) => setCurrentImg(image)}
+                      onClick={() => setCurrentImg(image)}
                     />
                   </div>
                 ))}

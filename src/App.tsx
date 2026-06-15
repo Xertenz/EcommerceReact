@@ -8,8 +8,10 @@ import ProductDetails from "./pages/ProductDetails/ProductDetails";
 const App: React.FC = (): React.ReactNode => {
   return (
     <>
-      <TopHeader />
-      <BtmHeader />
+      <div className=" sticky top-0 left-0 z-10 bg-(--white-color)">
+        <TopHeader />
+        <BtmHeader />
+      </div>
 
       <Routes>
         <Route path="/" element={<Home />} />

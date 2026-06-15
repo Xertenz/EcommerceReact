@@ -5,14 +5,24 @@ import Logo from "../../img/logo.png";
 import { FaSearch } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { TiShoppingCart } from "react-icons/ti";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
 const TopHeader: React.FC = (): React.ReactNode => {
+  const context = useContext(CartContext);
+
+  if (!context) {
+    return null;
+  }
+
+  const { cartItems } = context;
+
   return (
     <div className="top-header">
       <div className="container mx-auto flex justify-between items-center">
         <div className="left">
           <Link to="/">
-            <img src={Logo} alt="Logo" />
+            <img src={Logo} alt="Logo" className="h-16 py-3" />
           </Link>
         </div>
 
@@ -25,7 +35,7 @@ const TopHeader: React.FC = (): React.ReactNode => {
               type="text"
               name="search"
               id="search"
-              className="search h-[38px] w-[440px] p-[12px] bg-(--bg-color) outline-none"
+              className="search h-[38px] w-[440px] p-3 bg-(--bg-color) outline-none"
               placeholder="Search for a product..."
             />
             <button
@@ -45,10 +55,11 @@ const TopHeader: React.FC = (): React.ReactNode => {
                 2
               </span>
             </div>
-            <div className="icon favorite relative text-2xl select-none cursor-pointer">
+
+            <div className="icon cart relative text-2xl select-none cursor-pointer">
               <TiShoppingCart />
               <span className="absolute -top-2 -right-2 text-[12px] bg-(--main-color) text-white w-5 h-5 flex justify-center items-center rounded-full">
-                2
+                {cartItems.length}
               </span>
             </div>
           </div>

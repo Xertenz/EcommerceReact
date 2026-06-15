@@ -1,0 +1,23 @@
+.in-cart {
+  @apply border border-(--main-color) transition-all duration-300;
+}
+
+.product.in-cart .add-to-cart {
+  @apply bg-(--main-color);
+}
+
+.product.in-cart .add-to-cart svg {
+  @apply text-(--white-color);
+}
+
+.product .in-cart-sign {
+  top: -32px;
+  left: 0;
+  transition: 0.3s all ease-in-out;
+}
+.product.in-cart .in-cart-sign {
+  top: 0;
+}
+.product.in-cart .in-cart-sign svg {
+  fill: rgb(48, 255, 48);
+}
