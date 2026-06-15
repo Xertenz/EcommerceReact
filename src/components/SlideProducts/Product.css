@@ -4,6 +4,7 @@
 
 .product.in-cart .add-to-cart {
   @apply bg-(--main-color);
+  pointer-events: none;
 }
 
 .product.in-cart .add-to-cart svg {

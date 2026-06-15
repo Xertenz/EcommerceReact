@@ -4,6 +4,7 @@ import BtmHeader from "./components/Header/BtmHeader";
 import TopHeader from "./components/Header/TopHeader";
 import Home from "./pages/Home/Home";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
+import Cart from "./pages/Cart/Cart";
 
 const App: React.FC = (): React.ReactNode => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = (): React.ReactNode => {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/products/:id" element={<ProductDetails />} />
       </Routes>
     </>

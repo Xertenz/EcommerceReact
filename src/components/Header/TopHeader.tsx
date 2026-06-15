@@ -57,10 +57,12 @@ const TopHeader: React.FC = (): React.ReactNode => {
             </div>
 
             <div className="icon cart relative text-2xl select-none cursor-pointer">
-              <TiShoppingCart />
-              <span className="absolute -top-2 -right-2 text-[12px] bg-(--main-color) text-white w-5 h-5 flex justify-center items-center rounded-full">
-                {cartItems.length}
-              </span>
+              <Link to={"/cart"} className="block">
+                <TiShoppingCart />
+                <span className="absolute -top-2 -right-2 text-[12px] bg-(--main-color) text-white w-5 h-5 flex justify-center items-center rounded-full">
+                  {cartItems.length}
+                </span>
+              </Link>
             </div>
           </div>
         </div>
