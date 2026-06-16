@@ -1,16 +1,18 @@
 import { FaStar, FaRegStarHalfStroke } from "react-icons/fa6";
 import { FaShoppingCart, FaShare, FaRegHeart } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import "./Product.css";
 import { FaCheck } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 type ProductItem = {
   id: number;
   title: string;
   description: string;
   price: number;
+  quantity: number;
   images: string[];
 };
 
@@ -26,6 +28,43 @@ const Product = ({ item }: Props) => {
 
   const { cartItems, addItem } = context;
   const isInCart = cartItems.find((i) => i.id == item.id);
+
+  const navigate = useNavigate();
+  const handleNavigateToCart = () => {
+    navigate("/cart");
+    toast.dismiss();
+  };
+
+  const handleAddToCart = () => {
+    addItem(item);
+    toast.success(
+      <div className="toast-wrapper flex items-center gap-5 min-w-[300px] max-w-[300px]">
+        <img
+          src={item.images[0]}
+          alt={item.title}
+          className="toast-img h-[50px] w-auto!"
+        />
+        <div className="toast-content flex flex-col gap-[5px]">
+          <span>
+            <strong className="title">{item.title}</strong>
+          </span>
+          <span>Added To Cart</span>
+          <div>
+            <button
+              onClick={handleNavigateToCart}
+              className="btn bg-(--main-color) py-2 px-4 text-white rounded-full cursor-pointer"
+            >
+              View Cart
+            </button>
+          </div>
+        </div>
+      </div>,
+      {
+        duration: 4000,
+      }
+    );
+  };
+
   return (
     <div
       className={`product ${
@@ -61,7 +100,7 @@ const Product = ({ item }: Props) => {
       </Link>
       <div className="product-icons text-(--main-color)! absolute top-1/2 -right-11 -translate-y-1/2 flex flex-col gap-3 group-hover:right-2 transition-all duration-300">
         <span
-          onClick={() => addItem(item)}
+          onClick={handleAddToCart}
           className="add-to-cart text-xl rounded-full p-1.5 bg-[#ededed] hover:bg-[#ddd] transition-colors"
         >
           <FaShoppingCart />

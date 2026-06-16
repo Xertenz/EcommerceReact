@@ -7,8 +7,11 @@ export default function Cart() {
   if (!context) {
     return <p>Error: CartContext not found.</p>;
   }
-  const { cartItems } = context;
-  const total = cartItems.reduce((acc, item) => acc + item.price, 0);
+  const { cartItems, increaseQuantity, decreaseQuantity, deleteItem } = context;
+  const total = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
 
   return (
     <section className="checkout mt-8 mb-12">
@@ -45,20 +48,29 @@ export default function Cart() {
                         </h1>
                         <p className="price mb-1.5">$ {item.price}</p>
                         <div className="quantity flex justify-start items-center gap-3 select-none">
-                          <button className="cursor-pointer bg-(--border-color) active:bg-[#c7c7c7d5] w-8 h-6 flex items-center justify-center">
+                          <button
+                            onClick={() => decreaseQuantity(item.id)}
+                            className="cursor-pointer bg-(--border-color) active:bg-[#c7c7c7d5] w-8 h-6 flex items-center justify-center"
+                          >
                             -
                           </button>
                           <span className="bg-(--border-color) text-(--main-color) p-1 min-w-8 h-6 flex items-center justify-center">
-                            1
+                            {item.quantity}
                           </span>
-                          <button className="cursor-pointer bg-(--border-color) active:bg-[#c7c7c7d5] w-8 h-6 flex items-center justify-center">
+                          <button
+                            onClick={() => increaseQuantity(item.id)}
+                            className="cursor-pointer bg-(--border-color) active:bg-[#c7c7c7d5] w-8 h-6 flex items-center justify-center"
+                          >
                             +
                           </button>
                         </div>
                       </div>
                     </div>
                     <div className="cart-item-delete">
-                      <span className="block cursor-pointer hover:scale-125 transition-transform">
+                      <span
+                        onClick={() => deleteItem(item.id)}
+                        className="block cursor-pointer hover:scale-125 transition-transform"
+                      >
                         <FaTrash className="fill-red-600" />
                       </span>
                     </div>

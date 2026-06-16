@@ -5,6 +5,7 @@ import TopHeader from "./components/Header/TopHeader";
 import Home from "./pages/Home/Home";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Cart from "./pages/Cart/Cart";
+import { Toaster } from "react-hot-toast";
 
 const App: React.FC = (): React.ReactNode => {
   return (
@@ -13,6 +14,16 @@ const App: React.FC = (): React.ReactNode => {
         <TopHeader />
         <BtmHeader />
       </div>
+
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          style: {
+            backgroundColor: "#e9e9e9",
+            borderRadius: "8px",
+          },
+        }}
+      />
 
       <Routes>
         <Route path="/" element={<Home />} />

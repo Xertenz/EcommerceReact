@@ -16,6 +16,7 @@ type Item = {
   description: string;
   images: string[];
   price: number;
+  quantity: number;
 };
 
 type Props = {
