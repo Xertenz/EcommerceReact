@@ -11,11 +11,15 @@ import "swiper/css/pagination";
 import { Autoplay, Navigation } from "swiper/modules";
 
 type Item = {
-  id: number;
-  title: string;
-  description: string;
+  id?: number;
   images: string[];
-  price: number;
+  title?: string;
+  price?: number;
+  availabilityStatus?: string;
+  brand?: string;
+  description?: string;
+  stock?: string;
+  category?: string;
   quantity: number;
 };
 

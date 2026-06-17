@@ -6,6 +6,7 @@ import Home from "./pages/Home/Home";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Cart from "./pages/Cart/Cart";
 import { Toaster } from "react-hot-toast";
+import ScrollToTop from "./components/SlideProducts/ScrollToTop";
 
 const App: React.FC = (): React.ReactNode => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = (): React.ReactNode => {
         <TopHeader />
         <BtmHeader />
       </div>
+      <ScrollToTop />
 
       <Toaster
         position="bottom-right"

@@ -18,6 +18,7 @@ interface Product {
   description: string;
   images: string[];
   price: number;
+  quantity: number;
 }
 
 interface ProductsState {

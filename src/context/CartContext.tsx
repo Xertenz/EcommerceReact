@@ -1,12 +1,16 @@
 import { createContext, useEffect, useState } from "react";
 
 interface Item {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
+  id?: number;
+  images?: string[];
+  title?: string;
+  price?: number;
+  availabilityStatus?: string;
+  brand?: string;
+  description?: string;
+  stock?: string;
+  category?: string;
   quantity: number;
-  images: string[];
 }
 
 type ValueType = {
