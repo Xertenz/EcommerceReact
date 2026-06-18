@@ -7,6 +7,8 @@ import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Cart from "./pages/Cart/Cart";
 import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./components/SlideProducts/ScrollToTop";
+import { AnimatePresence } from "framer-motion";
+import Category from "./pages/Categoy/Category";
 
 const App: React.FC = (): React.ReactNode => {
   return (
@@ -27,11 +29,14 @@ const App: React.FC = (): React.ReactNode => {
         }}
       />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/products/:id" element={<ProductDetails />} />
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/category/:category" element={<Category />} />
+        </Routes>
+      </AnimatePresence>
     </>
   );
 };

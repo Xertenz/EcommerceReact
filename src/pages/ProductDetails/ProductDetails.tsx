@@ -6,6 +6,7 @@ import ProductDetailsLoading from "./ProductDetailsLoading";
 import SlideProductsLoading from "../../components/SlideProducts/SlideProductsLoading";
 import ProductImage from "./ProductImage";
 import ProductInfo from "./ProductInfo";
+import PageTransition from "../../components/PageTransition/PageTransition";
 
 type Product = {
   id: number;
@@ -37,10 +38,9 @@ const ProductDetails: React.FC = (): React.ReactNode => {
         const data = await res.json();
         setProduct(data);
         setCurrentImg(data.images[0]);
+        setLoading(false);
       } catch (error) {
         console.error("error in fetching product details");
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -66,32 +66,39 @@ const ProductDetails: React.FC = (): React.ReactNode => {
     fetchRelatedProducts();
   }, [product?.category]);
 
-  if (loading) return <ProductDetailsLoading />;
   if (!product) return <p>Product not found....</p>;
 
   return (
-    <section className="product-details">
-      <div className="container mx-auto">
-        <div className="flex items-center gap-8 my-8">
-          <ProductImage
-            product={product}
-            currentImg={currentImg}
-            setCurrentImg={setCurrentImg}
-          />
-          <ProductInfo product={product} />
-        </div>
-        {loadingRelatedProducts ? (
-          <SlideProductsLoading />
-        ) : (
-          <div className="slide-products">
-            <SlideProducts
-              title={product.category.replace("-", " ")}
-              data={relatedProducts}
-            />
+    <PageTransition key={id}>
+      <section className="product-details">
+        <div className="container mx-auto">
+          <div className="flex items-center gap-8 my-8">
+            {loading ? (
+              <ProductDetailsLoading />
+            ) : (
+              <>
+                <ProductImage
+                  product={product}
+                  currentImg={currentImg}
+                  setCurrentImg={setCurrentImg}
+                />
+                <ProductInfo product={product} />
+              </>
+            )}
           </div>
-        )}
-      </div>
-    </section>
+          {loadingRelatedProducts ? (
+            <SlideProductsLoading />
+          ) : (
+            <div className="slide-products">
+              <SlideProducts
+                title={product.category.replace("-", " ")}
+                data={relatedProducts}
+              />
+            </div>
+          )}
+        </div>
+      </section>
+    </PageTransition>
   );
 };
 

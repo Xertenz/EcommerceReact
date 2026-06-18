@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import HeroSlider from "../../components/HeroSlider/HeroSlider";
 import SlideProducts from "../../components/SlideProducts/SlideProducts";
 import SlideProductsLoading from "../../components/SlideProducts/SlideProductsLoading";
+import PageTransition from "../../components/PageTransition/PageTransition";
 
 const categories: string[] = [
   "smartphones",
@@ -55,7 +56,7 @@ const Home: React.FC = (): React.ReactNode => {
   }, []);
 
   return (
-    <>
+    <PageTransition>
       <HeroSlider />
       {loading
         ? categories.map((category) => <SlideProductsLoading key={category} />)
@@ -66,7 +67,7 @@ const Home: React.FC = (): React.ReactNode => {
               data={products[category] || []}
             />
           ))}
-    </>
+    </PageTransition>
   );
 };
 

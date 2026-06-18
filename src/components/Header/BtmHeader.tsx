@@ -3,7 +3,7 @@ import { IoMenu } from "react-icons/io5";
 
 import { FaAngleDown } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { PiSignInBold } from "react-icons/pi";
 import { HiUserAdd } from "react-icons/hi";
 import "./header.scss";
@@ -26,6 +26,8 @@ const BtmHeader: React.FC = (): React.ReactNode => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [isCategoryShow, setIsCategoryShown] = useState<boolean>(false);
 
+  const location = useLocation();
+
   useEffect(() => {
     async function fetchCategories() {
       const response = await fetch("https://dummyjson.com/products/categories");
@@ -34,6 +36,11 @@ const BtmHeader: React.FC = (): React.ReactNode => {
     }
     fetchCategories();
   }, []);
+
+  useEffect(() => {
+    setIsCategoryShown(false);
+    console.log(location);
+  }, [location]);
 
   return (
     <nav className="bg-(--main-color)">
@@ -58,7 +65,7 @@ const BtmHeader: React.FC = (): React.ReactNode => {
                   {categories.map((category) => (
                     <li key={category.slug} className="group">
                       <Link
-                        to={category.url}
+                        to={`/category/${category.slug}`}
                         className="block py-3 ps-4 hover:ps-6 transition-all border-b border-b-(--border-color) group-last:border-b-0"
                       >
                         {category.name}

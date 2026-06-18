@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from "react";
 
 interface Item {
-  id?: number;
-  images?: string[];
+  id: number;
+  images: string[];
   title?: string;
-  price?: number;
+  price: number;
   availabilityStatus?: string;
   brand?: string;
   description?: string;

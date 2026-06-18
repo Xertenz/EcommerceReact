@@ -8,10 +8,10 @@ import { FaCheck } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 type ProductItem = {
-  id?: number;
+  id: number;
   images: string[];
   title?: string;
-  price?: number;
+  price: number;
   availabilityStatus?: string;
   brand?: string;
   description?: string;
