@@ -15,7 +15,7 @@ const TopHeader: React.FC = (): React.ReactNode => {
     return null;
   }
 
-  const { cartItems } = context;
+  const { cartItems, favorites } = context;
 
   return (
     <div className="top-header">
@@ -33,10 +33,12 @@ const TopHeader: React.FC = (): React.ReactNode => {
         <div className="right">
           <div className="icons flex items-center gap-5">
             <div className="icon favorite relative text-2xl select-none cursor-pointer">
-              <FaRegHeart />
-              <span className="absolute -top-2 -right-2 text-[12px] bg-(--main-color) text-white w-5 h-5 flex justify-center items-center rounded-full">
-                2
-              </span>
+              <Link to={"/favorites"} className="block">
+                <FaRegHeart />
+                <span className="absolute -top-2 -right-2 text-[12px] bg-(--main-color) text-white w-5 h-5 flex justify-center items-center rounded-full">
+                  {favorites.length}
+                </span>
+              </Link>
             </div>
 
             <div className="icon cart relative text-2xl select-none cursor-pointer">

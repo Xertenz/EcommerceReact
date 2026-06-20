@@ -67,7 +67,7 @@ const ProductDetails: React.FC = (): React.ReactNode => {
     fetchRelatedProducts();
   }, [product?.category]);
 
-  if (!product) return <p>Product not found....</p>;
+  if (!product) return;
 
   return (
     <PageTransition key={id}>
@@ -76,6 +76,8 @@ const ProductDetails: React.FC = (): React.ReactNode => {
           <div className="flex items-center gap-8 my-8">
             {loading ? (
               <ProductDetailsLoading />
+            ) : !product ? (
+              <p>no product found</p>
             ) : (
               <>
                 <ProductImage

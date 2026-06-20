@@ -2,12 +2,14 @@
   @apply border border-(--main-color) transition-all duration-300;
 }
 
-.product.in-cart .add-to-cart {
+.product.in-cart .add-to-cart,
+.product.in-fav .add-to-fav {
   @apply bg-(--main-color);
   /* pointer-events: none; */
 }
 
-.product.in-cart .add-to-cart svg {
+.product.in-cart .add-to-cart svg,
+.product.in-fav .add-to-fav svg {
   @apply text-(--white-color);
 }
 

@@ -19,11 +19,36 @@ type ValueType = {
   increaseQuantity: (id: number) => void;
   decreaseQuantity: (id: number) => void;
   deleteItem: (id: number) => void;
+  favorites: Item[];
+  addFavItem: (item: Item) => void;
+  removeFavItem: (item: Item) => void;
 };
 
 export const CartContext = createContext<ValueType | null>(null);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
+  const [favorites, setFavorites] = useState<Item[]>(() => {
+    const localFav = localStorage.getItem("favorites");
+    return localFav ? (JSON.parse(localFav) as Item[]) : [];
+  });
+
+  const addFavItem = (item: Item) => {
+    const favItemExist = favorites.find((favItem) => favItem.id == item.id);
+    if (!favItemExist) {
+      setFavorites([...favorites, item]);
+    }
+  };
+
+  const removeFavItem = (item: Item) => {
+    setFavorites((prevFavorites) =>
+      prevFavorites.filter((favItem) => favItem.id != item.id)
+    );
+  };
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
   const [cartItems, setCartItems] = useState<Item[]>(() => {
     const localData = localStorage.getItem("cartItems");
     return localData ? (JSON.parse(localData) as Item[]) : [];
@@ -69,6 +94,9 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         increaseQuantity,
         decreaseQuantity,
         deleteItem,
+        favorites,
+        addFavItem,
+        removeFavItem,
       }}
     >
       {children}

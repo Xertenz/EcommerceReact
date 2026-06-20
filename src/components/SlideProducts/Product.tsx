@@ -30,8 +30,9 @@ const Product = ({ item }: Props) => {
     return null;
   }
 
-  const { cartItems, addItem } = context;
-  const isInCart = cartItems.find((i) => i.id == item.id);
+  const { cartItems, addItem, favorites, addFavItem, removeFavItem } = context;
+  const itemIsInCart = cartItems.find((i) => i.id == item.id);
+  const itemIsInFav = favorites.find((favItem) => favItem.id == item.id);
 
   const navigate = useNavigate();
   const handleNavigateToCart = () => {
@@ -39,41 +40,81 @@ const Product = ({ item }: Props) => {
     toast.dismiss();
   };
 
+  const handleAddToFavorite = () => {
+    if (itemIsInFav) {
+      removeFavItem(item);
+      toast.error(<p>Item removed succesfully</p>, { duration: 4000 });
+    } else {
+      addFavItem(item);
+      toast.success(<p>Item added succesfully</p>, { duration: 4000 });
+    }
+  };
+
   const handleAddToCart = () => {
-    addItem(item);
-    toast.success(
-      <div className="toast-wrapper flex items-center gap-5 min-w-[300px] max-w-[300px]">
-        <img
-          src={item.images[0]}
-          alt={item.title}
-          className="toast-img h-[50px] w-auto!"
-        />
-        <div className="toast-content flex flex-col gap-[5px]">
-          <span>
-            <strong className="title">{item.title}</strong>
-          </span>
-          <span>Added To Cart</span>
-          <div>
-            <button
-              onClick={handleNavigateToCart}
-              className="btn bg-(--main-color) py-2 px-4 text-white rounded-full cursor-pointer"
-            >
-              View Cart
-            </button>
+    if (itemIsInCart) {
+      toast.error(
+        <div className="toast-wrapper flex items-center gap-5 min-w-[300px] max-w-[300px]">
+          <img
+            src={item.images[0]}
+            alt={item.title}
+            className="toast-img h-[50px] w-auto!"
+          />
+          <div className="toast-content flex flex-col gap-[5px]">
+            <span>
+              <strong className="title">{item.title}</strong>
+            </span>
+            <span>Already in Cart</span>
+            <div>
+              <button
+                onClick={handleNavigateToCart}
+                className="btn bg-(--main-color) py-2 px-4 text-white rounded-full cursor-pointer"
+              >
+                View Cart
+              </button>
+            </div>
           </div>
-        </div>
-      </div>,
-      {
-        duration: 4000,
-      }
-    );
+        </div>,
+        {
+          duration: 4000,
+        }
+      );
+    } else {
+      addItem(item);
+      toast.success(
+        <div className="toast-wrapper flex items-center gap-5 min-w-[300px] max-w-[300px]">
+          <img
+            src={item.images[0]}
+            alt={item.title}
+            className="toast-img h-[50px] w-auto!"
+          />
+          <div className="toast-content flex flex-col gap-[5px]">
+            <span>
+              <strong className="title">{item.title}</strong>
+            </span>
+            <span>Added To Cart</span>
+            <div>
+              <button
+                onClick={handleNavigateToCart}
+                className="btn bg-(--main-color) py-2 px-4 text-white rounded-full cursor-pointer"
+              >
+                View Cart
+              </button>
+            </div>
+          </div>
+        </div>,
+        {
+          duration: 4000,
+        }
+      );
+    }
   };
 
   return (
     <div
-      className={`product ${
-        isInCart && "in-cart"
-      } w-[250px] bg-(--white-color) cursor-pointer relative group overflow-hidden shadow-[10px_10px_15px_#94949429]`}
+      className={`product ${itemIsInCart && "in-cart"} ${
+        itemIsInFav && "in-fav"
+      }
+       w-[250px] bg-(--white-color) cursor-pointer relative group overflow-hidden shadow-[10px_10px_15px_#94949429]`}
     >
       <Link
         to={`/products/${item.id}`}
@@ -109,7 +150,10 @@ const Product = ({ item }: Props) => {
         >
           <FaShoppingCart />
         </span>
-        <span className="text-xl rounded-full p-1.5 bg-[#ededed] hover:bg-[#ddd] transition-colors">
+        <span
+          onClick={handleAddToFavorite}
+          className="add-to-fav text-xl rounded-full p-1.5 bg-[#ededed] hover:bg-[#ddd] transition-colors"
+        >
           <FaRegHeart />
         </span>
         <span className="text-xl rounded-full p-1.5 bg-[#ededed] hover:bg-[#ddd] transition-colors">
