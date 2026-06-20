@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./components/SlideProducts/ScrollToTop";
 import { AnimatePresence } from "framer-motion";
 import Category from "./pages/Categoy/Category";
+import SearchResults from "./pages/SearchResults/SearchResults";
 
 const App: React.FC = (): React.ReactNode => {
   return (
@@ -35,6 +36,7 @@ const App: React.FC = (): React.ReactNode => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/category/:category" element={<Category />} />
+          <Route path="/search" element={<SearchResults />} />
         </Routes>
       </AnimatePresence>
     </>

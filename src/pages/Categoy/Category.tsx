@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SlideProductsLoading from "../../components/SlideProducts/SlideProductsLoading";
-import ProductComponent from "../../components/SlideProducts/Product";
+import Product from "../../components/SlideProducts/Product";
 import PageTransition from "../../components/PageTransition/PageTransition";
 
 type ProductType = {
@@ -67,7 +67,7 @@ const Category = () => {
               </div>
               <div className="category-products flex justify-between items-center gap-12 flex-wrap">
                 {categoryProducts.products.map((item) => (
-                  <ProductComponent key={item.id} item={item} />
+                  <Product key={item.id} item={item} />
                 ))}
               </div>
             </div>

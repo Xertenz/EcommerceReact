@@ -34,6 +34,7 @@ const ProductDetails: React.FC = (): React.ReactNode => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
+        setLoading(true);
         const res = await fetch(`https://dummyjson.com/products/${id}`);
         const data = await res.json();
         setProduct(data);
@@ -51,15 +52,15 @@ const ProductDetails: React.FC = (): React.ReactNode => {
     const fetchRelatedProducts = async () => {
       if (!product) return;
       try {
+        setLoadingRelatedProducts(true);
         const res = await fetch(
           `https://dummyjson.com/products/category/${product.category}`
         );
         const data = await res.json();
         setRelatedProducts(data.products);
+        setLoadingRelatedProducts(false);
       } catch (error) {
         console.error("error in fetching related categories: ", error);
-      } finally {
-        setLoadingRelatedProducts(false);
       }
     };
 

@@ -39,7 +39,6 @@ const BtmHeader: React.FC = (): React.ReactNode => {
 
   useEffect(() => {
     setIsCategoryShown(false);
-    console.log(location);
   }, [location]);
 
   return (
