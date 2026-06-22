@@ -67,7 +67,7 @@ const SearchBox = () => {
           type="text"
           name="search"
           id="search"
-          className="search h-[38px] w-[440px] p-3 bg-(--bg-color) outline-none"
+          className="search h-[38px] w-[440px] p-3 bg-(--bg-color) outline-none placeholder:text-gray-400"
           placeholder="Search for a product..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}

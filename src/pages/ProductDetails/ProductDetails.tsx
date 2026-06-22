@@ -71,9 +71,9 @@ const ProductDetails: React.FC = (): React.ReactNode => {
 
   return (
     <PageTransition key={id}>
-      <section className="product-details">
+      <section className="product-details mt-8 mb-12">
         <div className="container mx-auto">
-          <div className="flex items-center gap-8 my-8">
+          <div className="flex items-center gap-8">
             {loading ? (
               <ProductDetailsLoading />
             ) : !product ? (

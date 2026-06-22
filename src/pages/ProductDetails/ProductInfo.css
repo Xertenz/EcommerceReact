@@ -1,2 +1,8 @@
-.in-cart .btn {
+.item-details.in-fav .add-to-fav {
+  @apply bg-(--main-color);
+  /* pointer-events: none; */
+}
+
+.item-details.in-fav .add-to-fav svg {
+  @apply text-(--white-color);
 }

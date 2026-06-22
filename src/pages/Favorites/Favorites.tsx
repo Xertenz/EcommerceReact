@@ -2,6 +2,7 @@ import { useContext } from "react";
 import PageTransition from "../../components/PageTransition/PageTransition";
 import Product from "../../components/SlideProducts/Product";
 import { CartContext } from "../../context/CartContext";
+import "./Favorites.css";
 
 const Favorites = () => {
   const context = useContext(CartContext);
@@ -12,7 +13,7 @@ const Favorites = () => {
 
   return (
     <PageTransition key={favorites.length}>
-      <div className="category-products mt-12">
+      <div className="category-products mt-8 mb-12">
         <div className="container mx-auto">
           {favorites.length ? (
             <div className="category-products-wrapper">

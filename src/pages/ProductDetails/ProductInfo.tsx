@@ -28,13 +28,24 @@ const ProductInfo = ({ product }: Product) => {
     return null;
   }
 
-  const { cartItems, addItem } = context;
+  const { cartItems, addItem, favorites, addFavItem, removeFavItem } = context;
   const isInCart = cartItems.find((i) => i.id == product.id);
+  const itemIsInFav = favorites.find((favItem) => favItem.id == product.id);
 
   const navigate = useNavigate();
   const handleNavigateToCart = () => {
     navigate("/cart");
     toast.dismiss();
+  };
+
+  const handleAddToFavorite = () => {
+    if (itemIsInFav) {
+      removeFavItem(product);
+      toast.error(<p>Item removed succesfully</p>, { duration: 4000 });
+    } else {
+      addFavItem(product);
+      toast.success(<p>Item added succesfully</p>, { duration: 4000 });
+    }
   };
 
   const handleAddToCart = () => {
@@ -70,7 +81,12 @@ const ProductInfo = ({ product }: Product) => {
   };
 
   return (
-    <div className={`item-details w-3/5! border-none ${isInCart && "in-cart"}`}>
+    <div
+      className={`item-details w-3/5! border-none ${isInCart && "in-cart"} ${
+        itemIsInFav && "in-fav"
+      }
+    `}
+    >
       <div className="wrapper">
         <h1 className="name mb-4 text-4xl font-bold text-(--main-color)!">
           {product.title}
@@ -109,7 +125,10 @@ const ProductInfo = ({ product }: Product) => {
         <br />
 
         <div className="icons inline-flex">
-          <span className="text-xl rounded-full p-1.5 bg-[#ededed] hover:bg-(--main-color) hover:text-white transition-colors cursor-pointer">
+          <span
+            onClick={handleAddToFavorite}
+            className="add-to-fav text-xl rounded-full p-1.5 bg-[#ededed] hover:bg-(--main-color) hover:text-white transition-colors cursor-pointer"
+          >
             <FaRegHeart />
           </span>
         </div>
